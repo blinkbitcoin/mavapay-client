@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-      - run: pnpm install
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install
       - name: Run check code
         run: pnpm code:check

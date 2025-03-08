@@ -17,5 +17,5 @@
     "declaration": true,
     "noErrorTruncation": true
   },
-  "include": ["src", "eslint.config.mjs", "__TEST__"]
+  "include": ["src", "__tests__", "eslint.config.mjs"]
 }

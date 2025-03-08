@@ -1,9 +1,9 @@
 module.exports = {
-  roots: ["<rootDir>/__TEST__"],
+  roots: ["<rootDir>/__tests__"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
   },
-  modulePaths: ["<rootDir>/__TEST__"],
+  modulePaths: ["<rootDir>/__tests__"],
   testPathIgnorePatterns: ["/node_modules/"],
   fakeTimers: {
     enableGlobally: true,
