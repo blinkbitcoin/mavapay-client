@@ -19,7 +19,7 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    },
+    }
   },
   "include": ["src", "__tests__", "eslint.config.mjs"]
 }
