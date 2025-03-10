@@ -2,7 +2,6 @@ import { Bank } from "@/domain/bank/bank"
 import { ApiError } from "@/domain/common/api-error"
 import { BankRepository } from "@/interfaces/bank/bank-repository"
 
-// TODO: Replace BASE_URL and BANKS_ENDPOINT with environment variables
 const BASE_URL = "https://staging.api.mavapay.co"
 const BANKS_ENDPOINT = "/api/v1/bank/bankcode"
 
