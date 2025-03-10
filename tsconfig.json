@@ -15,7 +15,11 @@
     "preserveSymlinks": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
   },
   "include": ["src", "__tests__", "eslint.config.mjs"]
 }
