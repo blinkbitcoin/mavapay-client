@@ -1,7 +1,7 @@
-import { getBanksByCountry } from "../../src/application/bank/get-banks-by-country"
-import { BankRepository } from "../../src/interfaces/bank/bank-repository"
-import { Bank } from "../../src/domain/bank/bank"
-import { ApiError } from "../../src/domain/common/api-error"
+import { getBanksByCountry } from "@/application/bank/get-banks-by-country"
+import { BankRepository } from "@/interfaces/bank/bank-repository"
+import { Bank } from "@/domain/bank/bank"
+import { ApiError } from "@/domain/common/api-error"
 
 type MockBankRepository = BankRepository
 
