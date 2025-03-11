@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": "https://github.com/blinkbitcoin/mavapay-client.git",
   "scripts": {
-    "build": "pnpm install && rm -rf dist && pnpm tsc --sourceMap false --skipLibCheck true",
+    "build": "pnpm install && tsup",
     "code:check": "pnpm tsc:check && pnpm eslint:check && pnpm prettier:check",
     "eslint:check": "eslint .",
     "eslint:fix": "eslint . --fix",
