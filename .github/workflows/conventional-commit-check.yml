@@ -2,6 +2,8 @@ name: "Conventional commits"
 on:
   pull_request:
     branches: [main]
+permissions:
+  pull-requests: write
 jobs:
   conventional:
     name: "Conventional commits"
