@@ -21,10 +21,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "src",
-    "__tests__",
-    "eslint.config.mjs",
-    "tsup.config.ts"
-  ]
+  "include": ["src", "__tests__", "eslint.config.mjs", "tsup.config.ts"]
 }
