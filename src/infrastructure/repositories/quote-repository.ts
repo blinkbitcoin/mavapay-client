@@ -1,9 +1,9 @@
-import { QuoteRequest, QuoteResponse } from "@/domain/quote/quote"
-import { ApiError } from "@/domain/common/api-error"
-import { QuoteRepository } from "@/interfaces/quote/quote-repository"
-import { getHost, getApiKey } from "@/infrastructure/common/auth-service"
+import { QuoteRequest, QuoteResponse } from "@/domain"
+import { ApiError } from "@/domain/errors"
+import { QuoteRepository } from "@/domain/repositories"
+import { getHost, getApiKey } from "@/infrastructure/services"
 
-export const mavapayQuoteRepository: QuoteRepository = {
+export const quoteRepository: QuoteRepository = {
   getQuote: async (quoteRequest: QuoteRequest): Promise<QuoteResponse | ApiError> => {
     const host = getHost()
     const apiKey = getApiKey()

@@ -1,4 +1,4 @@
-import { AuthConfig, Network } from "@/domain/common/auth-config"
+import { AuthConfig, Network } from "@/domain/config"
 
 const NETWORK_HOSTS: Record<Network, string> = {
   mainnet: "https://api.mavapay.co",

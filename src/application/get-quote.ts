@@ -1,6 +1,6 @@
-import { QuoteRequest, QuoteResponse } from "@/domain/quote/quote"
-import { ApiError } from "@/domain/common/api-error"
-import { QuoteRepository } from "@/interfaces/quote/quote-repository"
+import { QuoteRequest, QuoteResponse } from "@/domain"
+import { ApiError } from "@/domain/errors"
+import { QuoteRepository } from "@/domain/repositories"
 
 export const getQuote =
   (quoteRepository: QuoteRepository) =>

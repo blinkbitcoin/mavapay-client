@@ -1,7 +1,7 @@
-import { getQuote } from "@/application/quote/get-quote"
-import { QuoteRepository } from "@/interfaces/quote/quote-repository"
-import { QuoteRequest, QuoteResponse } from "@/domain/quote/quote"
-import { ApiError } from "@/domain/common/api-error"
+import { QuoteRepository } from "@/domain/repositories"
+import { getQuote } from "@/application"
+import { ApiError } from "@/domain/errors"
+import { QuoteRequest, QuoteResponse } from "@/domain"
 
 type MockQuoteRepository = QuoteRepository
 
