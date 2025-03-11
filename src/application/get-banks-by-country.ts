@@ -1,6 +1,6 @@
-import { Bank } from "@/domain/bank/bank"
-import { ApiError } from "@/domain/common/api-error"
-import { BankRepository } from "@/interfaces/bank/bank-repository"
+import { Bank } from "@/domain"
+import { ApiError } from "@/domain/errors"
+import { BankRepository } from "@/domain/repositories"
 
 export const getBanksByCountry =
   (bankRepository: BankRepository) =>
