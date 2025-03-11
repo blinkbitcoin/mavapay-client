@@ -10,6 +10,7 @@
     "eslint:check": "eslint .",
     "eslint:fix": "eslint . --fix",
     "test": "jest",
+    "coverage": "jest --runInBand --coverage",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "tsc:check": "tsc --pretty --noEmit --skipLibCheck"
