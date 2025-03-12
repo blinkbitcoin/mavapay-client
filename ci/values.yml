@@ -1,0 +1,9 @@
+#@data/values
+---
+git_uri: git@github.com:GaloyMoney/mavapay-client.git
+git_branch: main
+github_private_key: ((github.private_key))
+github_token: ((github.api_token))
+
+gh_org: GaloyMoney
+gh_repository: galoy-client
