@@ -1,26 +1,41 @@
-import { BankRepository } from "@/domain/repositories"
 import { getBanksByCountry } from "@/application"
+import { BankRepository } from "@/domain/repositories"
 import { ApiError } from "@/domain/errors"
-import { Bank } from "@/domain"
+import { Bank, BankAccount } from "@/domain"
 
-type MockBankRepository = BankRepository
+type MockRepository = BankRepository
 
-const mockBankRepository: MockBankRepository = {
-  getBanksByCountry: async (): Promise<Bank[]> => [
-    { bankName: "KUDA MICROFINANCE BANK", nipBankCode: "090267" },
-  ],
+const mockGetBancksByCountrySuccess = [{
+  bankName: "KUDA MICROFINANCE BANK",
+  nipBankCode: "090267",
+}]
+
+const mockValidateBankAccountSuccess = {
+  status: "ok",
+  message: "",
+  data: {
+    accountName: "Customer Name",
+    accountNumber: "1234567891",
+    bankCode: "1000",
+  },
 }
 
-describe("getBanksByCountry", () => {
+const mockRepository: MockRepository = {
+  getBanksByCountry: async (): Promise<Bank[]> => mockGetBancksByCountrySuccess,
+  validateBankAccount: async (): Promise<BankAccount> => mockValidateBankAccountSuccess,
+}
+
+describe("getBanksByCountry (Application Layer)", () => {
   it("should return a list of banks for a given country", async () => {
-    const useCase = getBanksByCountry(mockBankRepository)
+    const useCase = getBanksByCountry(mockRepository)
     const banks = await useCase("NG")
 
-    expect(banks).toEqual([{ bankName: "KUDA MICROFINANCE BANK", nipBankCode: "090267" }])
+    expect(banks).toEqual(mockGetBancksByCountrySuccess)
   })
 
   it("should handle API errors correctly", async () => {
-    const errorMockRepository: MockBankRepository = {
+    const errorMockRepository: MockRepository = {
+      ...mockRepository,
       getBanksByCountry: async (): Promise<ApiError> => ({
         type: "ApiResponseError",
         message: "Invalid country code",
@@ -30,6 +45,34 @@ describe("getBanksByCountry", () => {
     const useCase = getBanksByCountry(errorMockRepository)
     const result = await useCase("XV")
 
-    expect(result).toEqual({ type: "ApiResponseError", message: "Invalid country code" })
+    expect(result).toEqual({
+      type: "ApiResponseError",
+      message: "Invalid country code",
+    })
+  })
+})
+
+describe("validateBankAccount (Repository Layer)", () => {
+  it("should return a response for a valid bank account", async () => {
+    const result = await mockRepository.validateBankAccount(1234567891, 1000)
+
+    expect(result).toEqual(mockValidateBankAccountSuccess)
+  })
+
+  it("should handle API errors correctly", async () => {
+    const errorMockRepository: MockRepository = {
+      ...mockRepository,
+      validateBankAccount: async (): Promise<ApiError> => ({
+        type: "ApiResponseError",
+        message: "Error verifying account",
+      }),
+    }
+
+    const result = await errorMockRepository.validateBankAccount(123456789, 1000)
+
+    expect(result).toEqual({
+      type: "ApiResponseError",
+      message: "Error verifying account",
+    })
   })
 })
