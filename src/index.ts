@@ -1,6 +1,14 @@
-import { getBanksByCountry } from "@/application/bank/get-banks-by-country"
-import { mavapayBankRepository } from "@/infrastructure/bank/mavapay-bank-repository"
+import {
+  bankRepository,
+  quoteRepository,
+  validateAccountRepository,
+} from "@/infrastructure/repositories"
+import { setAuthConfig } from "@/infrastructure/services"
+import { getBanksByCountry, getQuote, validateBankAccount } from "@/application"
 
 export const mavapayClient = {
-  getBanksByCountry: getBanksByCountry(mavapayBankRepository),
+  configureAuth: setAuthConfig,
+  getBanksByCountry: getBanksByCountry(bankRepository),
+  getQuote: getQuote(quoteRepository),
+  validateBankAccount: validateBankAccount(validateAccountRepository),
 }
