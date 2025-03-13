@@ -1,16 +1,32 @@
-export type QuoteRequest = {
+export type Currency = "NGNKOBO" | "ZARCENT"
+
+export type NGNBeneficiary = {
+  bankAccountNumber: string
+  bankAccountName: string
+  bankCode: string
+  bankName: string
+}
+
+export type ZARBeneficiary = {
+  name: string
+  bankName: string
+  bankAccountNumber: string
+}
+
+export type BeneficiaryByPaymentCurrency<T extends Currency> = T extends "NGNKOBO"
+  ? NGNBeneficiary
+  : T extends "ZARCENT"
+    ? ZARBeneficiary
+    : never
+
+export type QuoteRequest<T extends Currency> = {
   amount: number
   sourceCurrency: "BTCSAT"
-  targetCurrency: "NGNKOBO" | "KESCENT" | "ZARCENT"
+  targetCurrency: T
   paymentMethod: "LIGHTNING"
-  paymentCurrency: "NGNKOBO" | "KESCENT" | "ZARCENT"
+  paymentCurrency: T
   autopayout?: boolean
-  beneficiary: {
-    bankAccountNumber: string
-    bankAccountName: string
-    bankCode: string
-    bankName: string
-  }
+  beneficiary: BeneficiaryByPaymentCurrency<T>
 }
 
 export type QuoteResponse = {
@@ -20,7 +36,7 @@ export type QuoteResponse = {
     exchangeRate: number
     usdToTargetCurrencyRate: number
     sourceCurrency: "BTCSAT"
-    targetCurrency: "NGNKOBO" | "KESCENT" | "ZARCENT"
+    targetCurrency: Currency
     transactionFeesInSourceCurrency: number
     transactionFeesInTargetCurrency: string
     amountInSourceCurrency: number

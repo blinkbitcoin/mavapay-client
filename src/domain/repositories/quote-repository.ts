@@ -1,6 +1,8 @@
-import { QuoteRequest, QuoteResponse } from "@/domain"
+import { Currency, QuoteRequest, QuoteResponse } from "@/domain"
 import { ApiError } from "@/domain/errors"
 
 export type QuoteRepository = {
-  getQuote: (quoteRequest: QuoteRequest) => Promise<QuoteResponse | ApiError>
+  getQuote: <T extends Currency>(
+    quoteRequest: QuoteRequest<T>,
+  ) => Promise<QuoteResponse | ApiError>
 }
