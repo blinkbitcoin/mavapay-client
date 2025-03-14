@@ -5,5 +5,5 @@ import { getBanksByCountry, getQuote } from "@/application"
 export const mavapayClient = {
   configureAuth: setAuthConfig,
   getBanksByCountry: getBanksByCountry(bankRepository),
-  getQuote: getQuote(quoteRepository),
+  getQuote: getQuote(quoteRepository, bankRepository),
 }

@@ -1,8 +1,7 @@
-import { Currency, NGNBeneficiary, QuoteRequest, QuoteResponse } from "@/domain"
-import { ApiError, ApiErrorType, isApiError } from "@/domain/errors"
+import { Currency, QuoteRequest, QuoteResponse } from "@/domain"
+import { ApiError, ApiErrorType } from "@/domain/errors"
 import { QuoteRepository } from "@/domain/repositories"
 import { getHost, getApiKey } from "@/infrastructure/services"
-import { bankRepository } from "@/infrastructure/repositories"
 
 export const quoteRepository: QuoteRepository = {
   getQuote: async <T extends Currency>(
@@ -10,23 +9,6 @@ export const quoteRepository: QuoteRepository = {
   ): Promise<QuoteResponse | ApiError> => {
     const host = getHost()
     const apiKey = getApiKey()
-
-    if (quoteRequest.paymentCurrency === "NGNKOBO") {
-      const beneficiary = quoteRequest.beneficiary as NGNBeneficiary
-
-      const validationResult = await bankRepository.validateBankAccount(
-        Number(beneficiary.bankAccountNumber),
-        Number(beneficiary.bankCode),
-      )
-
-      if (isApiError(validationResult)) {
-        return {
-          type: ApiErrorType.ApiResponseError,
-          message: "Invalid bank account for NGNKOBO currency",
-          details: validationResult,
-        }
-      }
-    }
 
     try {
       const response = await fetch(`${host}/api/v1/quote`, {
