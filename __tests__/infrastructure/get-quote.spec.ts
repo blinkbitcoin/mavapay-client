@@ -32,7 +32,7 @@ const mockQuoteRepository: MockQuoteRepository = {
 }
 
 describe("getQuote", () => {
-  const mockRequest: QuoteRequest = {
+  const mockRequest: QuoteRequest<"NGNKOBO"> = {
     amount: 1000,
     sourceCurrency: "BTCSAT",
     targetCurrency: "NGNKOBO",

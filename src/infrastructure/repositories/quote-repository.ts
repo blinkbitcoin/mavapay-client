@@ -1,10 +1,12 @@
-import { QuoteRequest, QuoteResponse } from "@/domain"
+import { Currency, QuoteRequest, QuoteResponse } from "@/domain"
 import { ApiError } from "@/domain/errors"
 import { QuoteRepository } from "@/domain/repositories"
 import { getHost, getApiKey } from "@/infrastructure/services"
 
 export const quoteRepository: QuoteRepository = {
-  getQuote: async (quoteRequest: QuoteRequest): Promise<QuoteResponse | ApiError> => {
+  getQuote: async <T extends Currency>(
+    quoteRequest: QuoteRequest<T>,
+  ): Promise<QuoteResponse | ApiError> => {
     const host = getHost()
     const apiKey = getApiKey()
 
