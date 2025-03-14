@@ -1,7 +1,7 @@
-import { QuoteRepository } from "@/domain/repositories"
+import { BankRepository, QuoteRepository } from "@/domain/repositories"
 import { getQuote } from "@/application"
-import { ApiError } from "@/domain/errors"
-import { QuoteRequest, QuoteResponse } from "@/domain"
+import { ApiError, ApiErrorType } from "@/domain/errors"
+import { QuoteRequest, QuoteResponse, BankAccount } from "@/domain"
 
 type MockQuoteRepository = QuoteRepository
 
@@ -31,6 +31,19 @@ const mockQuoteRepository: MockQuoteRepository = {
   }),
 }
 
+const mockBankRepository = {
+  validateBankAccount: async (): Promise<BankAccount | ApiError> => ({
+    status: "ok",
+    message: "",
+    data: {
+      accountName: "Customer Name",
+      accountNumber: "1234567891",
+      bankCode: "1000",
+    },
+  }),
+  getBanksByCountry: jest.fn(),
+}
+
 describe("getQuote", () => {
   const mockRequest: QuoteRequest<"NGNKOBO"> = {
     amount: 1000,
@@ -48,7 +61,7 @@ describe("getQuote", () => {
   }
 
   it("should return a quote response for a valid request", async () => {
-    const useCase = getQuote(mockQuoteRepository)
+    const useCase = getQuote(mockQuoteRepository, mockBankRepository)
     const response = await useCase(mockRequest)
 
     expect(response).toEqual({
@@ -79,17 +92,36 @@ describe("getQuote", () => {
   it("should handle API errors correctly", async () => {
     const errorMockRepository: MockQuoteRepository = {
       getQuote: async (): Promise<ApiError> => ({
-        type: "ApiResponseError",
+        type: ApiErrorType.ApiResponseError,
         message: "Invalid request data",
       }),
     }
 
-    const useCase = getQuote(errorMockRepository)
+    const useCase = getQuote(errorMockRepository, mockBankRepository)
     const result = await useCase(mockRequest)
 
     expect(result).toEqual({
-      type: "ApiResponseError",
+      type: ApiErrorType.ApiResponseError,
       message: "Invalid request data",
     })
+  })
+
+  it("should return an error if bank account validation fails", async () => {
+    const failingBankRepository = {
+      validateBankAccount: async (): Promise<ApiError> => ({
+        type: ApiErrorType.ApiResponseError,
+        message: "Invalid bank account",
+      }),
+    } as unknown as BankRepository
+
+    const useCase = getQuote(mockQuoteRepository, failingBankRepository)
+    const result = await useCase(mockRequest)
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        type: ApiErrorType.ApiResponseError,
+        message: "Invalid bank account for NGNKOBO currency",
+      }),
+    )
   })
 })

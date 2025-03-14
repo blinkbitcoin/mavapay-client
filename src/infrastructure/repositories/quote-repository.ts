@@ -1,5 +1,5 @@
 import { Currency, QuoteRequest, QuoteResponse } from "@/domain"
-import { ApiError } from "@/domain/errors"
+import { ApiError, ApiErrorType } from "@/domain/errors"
 import { QuoteRepository } from "@/domain/repositories"
 import { getHost, getApiKey } from "@/infrastructure/services"
 
@@ -22,7 +22,7 @@ export const quoteRepository: QuoteRepository = {
 
       if (!response.ok) {
         return {
-          type: "ApiResponseError",
+          type: ApiErrorType.ApiResponseError,
           message: `Error fetching quote: ${response.status} ${response.statusText}`,
           details: await response.json().catch(() => null),
         }
@@ -32,7 +32,7 @@ export const quoteRepository: QuoteRepository = {
       return responseData
     } catch (error) {
       return {
-        type: "NetworkError",
+        type: ApiErrorType.NetworkError,
         message: "Network request failed",
         details: error instanceof Error ? error.message : error,
       }
