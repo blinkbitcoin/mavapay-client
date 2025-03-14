@@ -28,8 +28,8 @@ export const bankRepository: BankRepository = {
   },
 
   validateBankAccount: async (
-    accountNumber: number,
-    bankCode: number,
+    accountNumber: string,
+    bankCode: string,
   ): Promise<BankAccount | ApiError> => {
     const host = getHost()
     const apiKey = getApiKey()

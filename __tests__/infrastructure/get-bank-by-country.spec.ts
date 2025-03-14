@@ -56,7 +56,7 @@ describe("getBanksByCountry (Application Layer)", () => {
 
 describe("validateBankAccount (Repository Layer)", () => {
   it("should return a response for a valid bank account", async () => {
-    const result = await mockRepository.validateBankAccount(1234567891, 1000)
+    const result = await mockRepository.validateBankAccount("1234567891", "1000")
 
     expect(result).toEqual(mockValidateBankAccountSuccess)
   })
@@ -70,7 +70,7 @@ describe("validateBankAccount (Repository Layer)", () => {
       }),
     }
 
-    const result = await errorMockRepository.validateBankAccount(123456789, 1000)
+    const result = await errorMockRepository.validateBankAccount("123456789", "1000")
 
     expect(result).toEqual({
       type: "ApiResponseError",

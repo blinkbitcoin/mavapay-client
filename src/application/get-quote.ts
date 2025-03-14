@@ -10,8 +10,8 @@ export const getQuote =
     if (quoteRequest.paymentCurrency === "NGNKOBO") {
       const beneficiary = quoteRequest.beneficiary as NGNBeneficiary
       const validationResult = await bankRepository.validateBankAccount(
-        Number(beneficiary.bankAccountNumber),
-        Number(beneficiary.bankCode),
+        beneficiary.bankAccountNumber,
+        beneficiary.bankCode,
       )
 
       if (isApiError(validationResult)) {
