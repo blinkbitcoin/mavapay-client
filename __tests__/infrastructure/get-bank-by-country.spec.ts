@@ -1,14 +1,16 @@
 import { getBanksByCountry } from "@/application"
 import { BankRepository } from "@/domain/repositories"
-import { ApiError } from "@/domain/errors"
+import { ApiError, ApiErrorType } from "@/domain/errors"
 import { Bank, BankAccount } from "@/domain"
 
 type MockRepository = BankRepository
 
-const mockGetBancksByCountrySuccess = [{
-  bankName: "KUDA MICROFINANCE BANK",
-  nipBankCode: "090267",
-}]
+const mockGetBancksByCountrySuccess = [
+  {
+    bankName: "KUDA MICROFINANCE BANK",
+    nipBankCode: "090267",
+  },
+]
 
 const mockValidateBankAccountSuccess = {
   status: "ok",
@@ -37,7 +39,7 @@ describe("getBanksByCountry (Application Layer)", () => {
     const errorMockRepository: MockRepository = {
       ...mockRepository,
       getBanksByCountry: async (): Promise<ApiError> => ({
-        type: "ApiResponseError",
+        type: ApiErrorType.ApiResponseError,
         message: "Invalid country code",
       }),
     }
@@ -46,7 +48,7 @@ describe("getBanksByCountry (Application Layer)", () => {
     const result = await useCase("XV")
 
     expect(result).toEqual({
-      type: "ApiResponseError",
+      type: ApiErrorType.ApiResponseError,
       message: "Invalid country code",
     })
   })
@@ -63,7 +65,7 @@ describe("validateBankAccount (Repository Layer)", () => {
     const errorMockRepository: MockRepository = {
       ...mockRepository,
       validateBankAccount: async (): Promise<ApiError> => ({
-        type: "ApiResponseError",
+        type: ApiErrorType.ApiResponseError,
         message: "Error verifying account",
       }),
     }

@@ -1,5 +1,5 @@
 import { Bank, BankAccount } from "@/domain"
-import { ApiError } from "@/domain/errors"
+import { ApiError, ApiErrorType } from "@/domain/errors"
 import { BankRepository } from "@/domain/repositories"
 import { getHost, getApiKey } from "@/infrastructure/services"
 
@@ -11,7 +11,7 @@ export const bankRepository: BankRepository = {
       const response = await fetch(`${host}/api/v1/bank/bankcode?country=${country}`)
       if (!response.ok) {
         return {
-          type: "ApiResponseError",
+          type: ApiErrorType.ApiResponseError,
           message: `Error fetching banks: ${response.status} ${response.statusText}`,
           details: await response.json().catch(() => null),
         }
@@ -20,7 +20,7 @@ export const bankRepository: BankRepository = {
       return responseData.data
     } catch (error) {
       return {
-        type: "NetworkError",
+        type: ApiErrorType.NetworkError,
         message: "Network request failed",
         details: error instanceof Error ? error.message : error,
       }
@@ -47,7 +47,7 @@ export const bankRepository: BankRepository = {
       )
       if (!response.ok) {
         return {
-          type: "ApiResponseError",
+          type: ApiErrorType.ApiResponseError,
           message: `Error verifying account: ${response.status} ${response.statusText}`,
           details: await response.json().catch(() => null),
         }
@@ -56,7 +56,7 @@ export const bankRepository: BankRepository = {
       return responseData.data
     } catch (error) {
       return {
-        type: "NetworkError",
+        type: ApiErrorType.NetworkError,
         message: "Network request failed",
         details: error instanceof Error ? error.message : error,
       }

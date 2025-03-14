@@ -1,6 +1,6 @@
 import { QuoteRepository } from "@/domain/repositories"
 import { getQuote } from "@/application"
-import { ApiError } from "@/domain/errors"
+import { ApiError, ApiErrorType } from "@/domain/errors"
 import { QuoteRequest, QuoteResponse } from "@/domain"
 
 type MockQuoteRepository = QuoteRepository
@@ -79,7 +79,7 @@ describe("getQuote", () => {
   it("should handle API errors correctly", async () => {
     const errorMockRepository: MockQuoteRepository = {
       getQuote: async (): Promise<ApiError> => ({
-        type: "ApiResponseError",
+        type: ApiErrorType.ApiResponseError,
         message: "Invalid request data",
       }),
     }
@@ -88,7 +88,7 @@ describe("getQuote", () => {
     const result = await useCase(mockRequest)
 
     expect(result).toEqual({
-      type: "ApiResponseError",
+      type: ApiErrorType.ApiResponseError,
       message: "Invalid request data",
     })
   })
