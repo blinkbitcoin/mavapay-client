@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 
-#@ load("vendor/pipeline-fragments.lib.yml",
+#@ load("vendor/ci/pipeline-fragments.lib.yml",
 #@   "repo_resource",
 #@   "pipeline_tasks_resource",
 #@   "deps_version_resource",
