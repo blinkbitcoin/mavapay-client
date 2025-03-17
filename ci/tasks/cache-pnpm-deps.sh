@@ -7,7 +7,7 @@ tar_out="$(pwd)/bundled-deps"
 pushd deps
 # Install dependencies
 echo "  * pnpm install"
-pnpm install # --no-hoist
+pnpm install --shamefully-hoist
 
 # Get git reference for versioning
 echo "  * git log"
