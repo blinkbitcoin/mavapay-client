@@ -29,7 +29,7 @@ function unpack_deps() {
     echo "Done!"
 
     popd
-  elif [[ -f ${REPO_PATH}/yarn.lock ]]; then
+  elif [[ -f ${REPO_PATH}/pnpm-lock.yaml ]]; then
     echo "Unpacking nodejs deps... (pnpm)"
 
     pushd ${REPO_PATH} > /dev/null
