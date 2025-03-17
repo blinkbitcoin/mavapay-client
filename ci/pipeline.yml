@@ -5,7 +5,8 @@
 #@   "pipeline_tasks_resource",
 #@   "deps_version_resource",
 #@   "bundled_deps_resource",
-#@   "nodejs_task_image_config")
+#@   "nodejs_task_image_config",
+#@   "gcr_resource_type")
 
 
 #! copy from pipeline-fragments.lib.yml
@@ -25,6 +26,26 @@ source:
 #@ end
 
 
+#@ def nodejs_check_code():
+name: check-code
+serial: true
+plan:
+- in_parallel:
+  - { get: repo, trigger: true }
+  - { get: pipeline-tasks }
+  - { get: bundled-deps, trigger: true}
+- task: check-code
+  config:
+    platform: linux
+    image_resource: #@ nodejs_task_image_config()
+    inputs:
+    - name: bundled-deps
+    - name: pipeline-tasks
+    - name: repo
+    run:
+      path: pipeline-tasks/ci/tasks/nodejs-check-code.sh #! that's the change
+on_failure: #@ slack_failure_notification()
+#@ end
 
 #! copy from pipeline-fragments.lib.yml
 #@ def install_pnpm_deps():
@@ -53,11 +74,16 @@ on_failure: #@ slack_failure_notification()
 #@ end
 
 jobs:
+- #@ nodejs_check_code()
 - #@ install_pnpm_deps()
 
 
 resources:
+- #@ repo_resource()
 - #@ nodejs_deps_resource()
 - #@ pipeline_tasks_resource()
 - #@ deps_version_resource()
 - #@ bundled_deps_resource()
+
+resource_types:
+- #@ gcr_resource_type()
