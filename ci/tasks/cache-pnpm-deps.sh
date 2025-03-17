@@ -19,6 +19,6 @@ tar --dereference -zcf "$output_file" \
     --exclude='.git' \
     --exclude='.github' \
     --exclude='ci' \
-    . > /dev/null
+    .
 
 popd
