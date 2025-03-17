@@ -13,4 +13,4 @@ unpack_deps
 
 pushd repo
 
-make check-code
+check_code
