@@ -56,8 +56,10 @@ function check_code() {
     echo "Done!"
   elif [[ -f ${REPO_PATH}/pnpm-lock.yaml ]]; then
     echo "Checking code... (pnpm)"
+    pushd ${REPO_PATH} > /dev/null
     pnpm code:check
     echo "Done!"
+    popd
   else 
     echo "Skipping check code"
   fi
