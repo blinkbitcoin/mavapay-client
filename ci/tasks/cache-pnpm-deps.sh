@@ -24,5 +24,7 @@ tar --dereference -zcf "$output_file" \
     --exclude='ci' \
     .
 
+echo "  * Contents:"
+tar -ztvf "$output_file"
 echo "  * Done!"
 popd
