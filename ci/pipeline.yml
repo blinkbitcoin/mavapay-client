@@ -73,9 +73,32 @@ plan:
 on_failure: #@ slack_failure_notification()
 #@ end
 
+#! This is copied from galoy-client and it's a hot candidate to move into 
+#@ def test():
+name: test
+serial: true
+plan:
+- in_parallel:
+  - { get: repo, trigger: true }
+  - { get: bundled-deps, trigger: true }
+  - { get: pipeline-tasks }
+- task: test
+  config:
+    platform: linux
+    image_resource: #@ nodejs_task_image_config()
+    inputs:
+    - name: bundled-deps
+    - name: pipeline-tasks
+    - name: repo
+    run:
+      path: pipeline-tasks/ci/tasks/test.sh
+#@ end
+
+
 jobs:
 - #@ nodejs_check_code()
 - #@ install_pnpm_deps()
+- #@ test()
 
 
 resources:
