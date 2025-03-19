@@ -111,6 +111,7 @@ jobs:
 - #@ nodejs_check_code()
 - #@ install_pnpm_deps()
 - #@ test()
+- #@ build()
 
 
 
