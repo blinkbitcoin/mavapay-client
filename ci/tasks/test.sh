@@ -8,4 +8,5 @@ unpack_deps
 
 pushd repo
 
-nix develop -c pnpm test
+#nix develop -c pnpm test
+pnpm test
