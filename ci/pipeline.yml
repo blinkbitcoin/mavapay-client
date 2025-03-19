@@ -163,7 +163,7 @@ plan:
     outputs:
     - name: repo
     run:
-      path: pipeline-tasks/ci/tasks/update-repo.sh
+      path: pipeline-tasks/ci/vendor/tasks/nodejs-update-package-json.sh
 - put: repo-out
   params:
     tag: artifacts/gh-release-tag

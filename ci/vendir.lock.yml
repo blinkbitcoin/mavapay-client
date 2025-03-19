@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'fix: fix name and comment image pipelines'
-      sha: 9bcbebd4b5eb94e20368a280f969f1452f4b3b09
+      commitTitle: 'chore: changes from repo pushed back into shared'
+      sha: 37db8d90e38d179e7934cb31b29c1e358301ef05
     path: .
   path: vendor
 kind: LockConfig
