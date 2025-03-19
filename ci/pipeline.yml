@@ -215,7 +215,7 @@ resources:
   type: npm
   source:
     package: mavapay-client
-    scope: k9ert
+    scope: blinkbitcoin
     registry:
       uri: https://registry.npmjs.org/
       token: #@ data.values.npm_token
@@ -223,3 +223,7 @@ resources:
 resource_types:
 - #@ gcr_resource_type()
 - #@ slack_resource_type()
+- name: npm
+  type: docker-image
+  source:
+    repository: timotto/concourse-npm-resource
