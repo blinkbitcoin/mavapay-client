@@ -8,4 +8,4 @@ unpack_deps
 
 pushd repo
 
-pnpm build
+pnpm tsup
