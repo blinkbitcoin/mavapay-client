@@ -13,7 +13,7 @@ pushd ${REPO_ROOT}
 set +e
 if [[ -f ${REPO_ROOT}/yarn.lock ]]; then
   yarn audit --groups dependencies --level ${LEVEL}
-elif [[ -f ${REPO_PATH}/pnpm-lock.yaml ]]; then
+elif [[ -f ${REPO_ROOT}/pnpm-lock.yaml ]]; then
   pnpm audit --prod --audit-level=${LEVEL}
 else 
   echo "Failed audit: Unsupported PckgMgr"
