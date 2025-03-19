@@ -1,24 +1,15 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:assert", "assert")
 
-#@ load("vendor/ci/pipeline-fragments.lib.yml",
+#@ load("vendor/pipeline-fragments.lib.yml",
 #@   "repo_resource",
+#@   "nodejs_deps_resource",
 #@   "pipeline_tasks_resource",
 #@   "deps_version_resource",
 #@   "bundled_deps_resource",
 #@   "nodejs_task_image_config",
 #@   "gcr_resource_type")
 
-
-#! copy from pipeline-fragments.lib.yml
-#@ def nodejs_deps_resource():
-name: deps
-type: git
-source:
-  paths: [pnpm-lock.yaml] #! that's the change
-  uri: #@ data.values.git_uri
-  branch: #@ data.values.git_branch
-  private_key: #@ data.values.github_private_key
-#@ end
 
 #! Do nothing for now!
 #@ def slack_failure_notification():
@@ -103,7 +94,7 @@ jobs:
 
 resources:
 - #@ repo_resource()
-- #@ nodejs_deps_resource()
+- #@ nodejs_deps_resource( pckgMgr="pnpm")
 - #@ pipeline_tasks_resource()
 - #@ deps_version_resource()
 - #@ bundled_deps_resource()

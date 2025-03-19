@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Merge pull request #1 from blinkbitcoin/oo/blinkify...'
-      sha: ee897139fba6285562500aadd45ab497edd29677
+      commitTitle: 'fix: fix name and comment image pipelines'
+      sha: 9bcbebd4b5eb94e20368a280f969f1452f4b3b09
     path: .
   path: vendor
 kind: LockConfig
