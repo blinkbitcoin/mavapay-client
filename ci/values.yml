@@ -3,9 +3,14 @@
 git_uri: git@github.com:blinkbitcoin/mavapay-client.git
 git_branch: kn/initial_pipeline
 github_private_key: ((github-blinkbitcoin.private_key))
+github_token: ((github-blinkbitcoin.api_token))
 
 gh_org: blinkbitcoin
 gh_repository: mavapay-client
 
 slack_channel: dummy_broken_channel
 slack_webhook_url: dummy_broken_webhook_url
+
+git_version_branch: version
+
+npm_token: ((npm.token))
