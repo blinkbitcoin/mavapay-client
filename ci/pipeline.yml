@@ -85,11 +85,33 @@ plan:
       path: pipeline-tasks/ci/tasks/test.sh
 #@ end
 
+#@ def build():
+name: build
+serial: true
+plan:
+- in_parallel:
+  - { get: repo, trigger: true }
+  - { get: bundled-deps, trigger: true }
+  - { get: pipeline-tasks }
+- task: build
+  config:
+    platform: linux
+    image_resource: #@ nodejs_task_image_config()
+    inputs:
+    - name: bundled-deps
+    - name: pipeline-tasks
+    - name: repo
+    outputs:
+    - name: repo
+    run:
+      path: pipeline-tasks/ci/tasks/build.sh
+#@ end
 
 jobs:
 - #@ nodejs_check_code()
 - #@ install_pnpm_deps()
 - #@ test()
+
 
 
 resources:
