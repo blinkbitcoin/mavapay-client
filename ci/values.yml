@@ -6,3 +6,6 @@ github_private_key: ((github-blinkbitcoin.private_key))
 
 gh_org: blinkbitcoin
 gh_repository: mavapay-client
+
+slack_channel: dummy_broken_channel
+slack_webhook_url: dummy_broken_webhook_url

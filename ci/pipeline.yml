@@ -3,12 +3,16 @@
 
 #@ load("vendor/pipeline-fragments.lib.yml",
 #@   "repo_resource",
+#@   "nodejs_audit",
 #@   "nodejs_deps_resource",
 #@   "pipeline_tasks_resource",
 #@   "deps_version_resource",
 #@   "bundled_deps_resource",
+#@   "release_task_image_config",
 #@   "nodejs_task_image_config",
-#@   "gcr_resource_type")
+#@   "slack_resource",
+#@   "gcr_resource_type",
+#@   "slack_resource_type")
 
 
 #! Do nothing for now!
@@ -107,8 +111,11 @@ plan:
       path: pipeline-tasks/ci/tasks/build.sh
 #@ end
 
+
+
 jobs:
 - #@ nodejs_check_code()
+- #@ nodejs_audit()
 - #@ install_pnpm_deps()
 - #@ test()
 - #@ build()
@@ -121,6 +128,8 @@ resources:
 - #@ pipeline_tasks_resource()
 - #@ deps_version_resource()
 - #@ bundled_deps_resource()
+- #@ slack_resource()
 
 resource_types:
 - #@ gcr_resource_type()
+- #@ slack_resource_type()
