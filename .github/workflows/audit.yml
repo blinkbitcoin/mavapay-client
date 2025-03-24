@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: "pnpm"
+          cache: "npm"
       - run: nix develop -c pnpm install --frozen-lockfile
       - name: Run audit
         run: nix develop -c pnpm audit --prod --audit-level=high
