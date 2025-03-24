@@ -2,14 +2,14 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'chore: changes for mavapay and pnpm'
-      sha: de463b0fcf0d864a77e8a9bef0da7d637bbe120f
+      commitTitle: 'chore: rename cache-pnpm-deps.sh to have prefix nodejs-'
+      sha: dcd1a858073e7b28a961536fc70273719af0fd3d
     path: .
   path: ../.github/workflows/vendor
 - contents:
   - git:
-      commitTitle: 'chore: changes for mavapay and pnpm'
-      sha: de463b0fcf0d864a77e8a9bef0da7d637bbe120f
+      commitTitle: 'chore: rename cache-pnpm-deps.sh to have prefix nodejs-'
+      sha: dcd1a858073e7b28a961536fc70273719af0fd3d
     path: .
   path: vendor
 kind: LockConfig
