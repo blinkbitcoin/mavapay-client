@@ -20,8 +20,13 @@ jobs:
       - name: Run the Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v8
 
-      - name: Install dependencies inside nix develop
-        run: nix develop -c pnpm install
+      # Make the Nix-provided pnpm available to setup-node
+      - name: Make pnpm available for caching
+        run: |
+          mkdir -p ~/.local/bin
+          nix develop -c bash -c 'which pnpm > /tmp/pnpm_path'
+          ln -sf $(cat /tmp/pnpm_path) ~/.local/bin/pnpm
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - uses: actions/setup-node@v3
         with:
