@@ -2,6 +2,7 @@
 #@ load("@ytt:assert", "assert")
 
 #@ load("vendor/pipeline-fragments.lib.yml",
+#@   "nodejs_check_code",
 #@   "repo_resource",
 #@   "nodejs_audit",
 #@   "nodejs_deps_resource",
@@ -22,27 +23,6 @@
 #@ return None
 #@ end
 
-
-#@ def nodejs_check_code():
-name: check-code
-serial: true
-plan:
-- in_parallel:
-  - { get: repo, trigger: true }
-  - { get: pipeline-tasks }
-  - { get: bundled-deps, trigger: true}
-- task: check-code
-  config:
-    platform: linux
-    image_resource: #@ nodejs_task_image_config()
-    inputs:
-    - name: bundled-deps
-    - name: pipeline-tasks
-    - name: repo
-    run:
-      path: pipeline-tasks/ci/tasks/nodejs-check-code.sh #! that's the change
-on_failure: #@ slack_failure_notification()
-#@ end
 
 #! copy from pipeline-fragments.lib.yml
 #@ def install_pnpm_deps():

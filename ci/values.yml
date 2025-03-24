@@ -13,4 +13,4 @@ slack_webhook_url: dummy_broken_webhook_url
 
 git_version_branch: version
 
-npm_token: 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
+npm_token: ((npm.token))
