@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'chore: changes from repo pushed back into shared'
-      sha: 37db8d90e38d179e7934cb31b29c1e358301ef05
+      commitTitle: 'fix: pr-label now blinkbitcoinbot'
+      sha: cde8ce0e0232812f07bb0cb0e9d704f8b2e590a6
     path: .
   path: vendor
 kind: LockConfig
