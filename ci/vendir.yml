@@ -1,13 +1,28 @@
 apiVersion: vendir.k14s.io/v1alpha1
 kind: Config
 
+# Relative to ci/
 directories:
-- path: vendor
+- path: ../.github/workflows/vendor
+  contents:
+  - path: . # Copy this folder out to ..
+    git:
+      url: https://github.com/blinkbitcoin/concourse-shared.git
+      ref: de463b0fcf0d864a77e8a9bef0da7d637bbe120f
+    includePaths:
+    - shared/actions/*
+    excludePaths:
+    - shared/actions/rust-*
+    - shared/actions/docker-*
+    - shared/actions/chart-*
+    newRootPath: shared/actions
+
+- path: ./vendor
   contents:
   - path: .
     git:
       url: https://github.com/blinkbitcoin/concourse-shared.git
-      ref: kn/mavapay_working
+      ref: de463b0fcf0d864a77e8a9bef0da7d637bbe120f
     includePaths:
     - shared/ci/**/*
     excludePaths:

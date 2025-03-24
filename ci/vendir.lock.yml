@@ -2,8 +2,14 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'fix: pr-label now blinkbitcoinbot'
-      sha: cde8ce0e0232812f07bb0cb0e9d704f8b2e590a6
+      commitTitle: 'chore: changes for mavapay and pnpm'
+      sha: de463b0fcf0d864a77e8a9bef0da7d637bbe120f
+    path: .
+  path: ../.github/workflows/vendor
+- contents:
+  - git:
+      commitTitle: 'chore: changes for mavapay and pnpm'
+      sha: de463b0fcf0d864a77e8a9bef0da7d637bbe120f
     path: .
   path: vendor
 kind: LockConfig
