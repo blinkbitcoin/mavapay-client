@@ -6,6 +6,7 @@
 #@   "repo_resource",
 #@   "nodejs_audit",
 #@   "nodejs_deps_resource",
+#@   "install_nodejs_deps",
 #@   "pipeline_tasks_resource",
 #@   "deps_version_resource",
 #@   "bundled_deps_resource",
@@ -23,32 +24,6 @@
 #@ return None
 #@ end
 
-
-#! copy from pipeline-fragments.lib.yml
-#@ def install_pnpm_deps():
-name: install-deps
-plan:
-- in_parallel:
-  - {get: deps, trigger: true}
-  - {get: pipeline-tasks}
-  - {put: deps-version, params: {bump: patch}}
-- task: install-deps
-  config:
-    platform: linux
-    image_resource: #@ nodejs_task_image_config()
-    inputs:
-    - name: pipeline-tasks
-    - name: deps
-    - name: deps-version
-    outputs:
-    - name: bundled-deps
-    run:
-      path: pipeline-tasks/ci/vendor/tasks/cache-pnpm-deps.sh #! that's the change
-- put: bundled-deps
-  params:
-    file: bundled-deps/bundled-deps-*.tgz
-on_failure: #@ slack_failure_notification()
-#@ end
 
 #! This is copied from galoy-client and it's a hot candidate to move into 
 #@ def test():
@@ -170,7 +145,7 @@ plan:
 jobs:
 - #@ nodejs_check_code()
 - #@ nodejs_audit()
-- #@ install_pnpm_deps()
+- #@ install_nodejs_deps(pckgMgr="pnpm")
 - #@ test()
 - #@ build()
 - #@ release()
@@ -178,7 +153,7 @@ jobs:
 
 resources:
 - #@ repo_resource()
-- #@ nodejs_deps_resource( pckgMgr="pnpm")
+- #@ nodejs_deps_resource(pckgMgr="pnpm")
 - #@ pipeline_tasks_resource()
 - #@ deps_version_resource()
 - #@ bundled_deps_resource()
