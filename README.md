@@ -27,7 +27,7 @@ pnpm add @blinkbitcoin/mavapay-client
 ### getBanksByCountry
 
 ```js
-import { mavapayClient } from "@mavapay/client"
+import { mavapayClient } from "@blinkbitcoin/mavapay-client"
 
 async function fetchBanks() {
  try {
@@ -46,23 +46,13 @@ async function fetchBanks() {
 fetchBanks()
 ```
 
-## Test
-
-Run tests using the Jest:
-
-```bash
-yarn test
-```
-
-Make sure that Jest is configured in your environment.
-
 ## Local Development
 
-To run the Mavapay Client locally,follow these steps:
+To run the Mavapay Client locally, follow these steps:
 
 ### Prerequisites
-**1)** Install `nix` with flakes enabled
-**2)** Install `direnv` and configure it for your shell
+- **1)** Install `nix` with flakes enabled
+- **2)** Install `direnv` and configure it for your shell
 
 All commands must be executed within the `nix` environment.
 
@@ -79,4 +69,12 @@ Build production (distribution) files in dist folder:
 
 ```bash
 nix develop -c pnpm build
+```
+
+## Test
+
+Run tests using Jest:
+
+```bash
+nix develop -c pnpm test
 ```
