@@ -4,6 +4,9 @@
   "version": "0.0.2",
   "license": "MIT",
   "repository": "https://github.com/blinkbitcoin/mavapay-client.git",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "pnpm install && tsup",
     "code:check": "pnpm tsc:check && pnpm eslint:check && pnpm prettier:check",
