@@ -7,7 +7,7 @@ tar_out="$(pwd)/bundled-deps"
 pushd deps
 # Install dependencies
 echo "    --> pnpm install"
-pnpm install --no-store # no-store as it would need a ~/.npm-store
+pnpm install --store-dir .npm-store # npm-store in the same directory
 
 # Get git reference for versioning
 echo "    --> git log"
