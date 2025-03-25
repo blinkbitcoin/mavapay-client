@@ -1,7 +1,9 @@
 # Mavapay-client
+
 TypeScript client library for **Mavapay Money API**. This library can be used in front-end applications such as web and mobile wallets to transfer Bitcoin to Nigeria.
 
 ## Installation
+
 You can install the package using yarn, npm or pnpm:
 
 ### using yarn:
@@ -30,17 +32,17 @@ pnpm add @blinkbitcoin/mavapay-client
 import { mavapayClient } from "@blinkbitcoin/mavapay-client"
 
 async function fetchBanks() {
- try {
+  try {
     const banks = await mavapayClient.getBanksByCountry("NG") // The parameter is a country code
 
     if ("type" in banks) {
-        console.error("Error retrieving banks:", banks.message)
+      console.error("Error retrieving banks:", banks.message)
     } else {
-        console.log("Banks retrieved:", banks) // Returns an array of bank objects
+      console.log("Banks retrieved:", banks) // Returns an array of bank objects
     }
- } catch (error) {
+  } catch (error) {
     console.error("Unexpected error: ", error)
- }
+  }
 }
 
 fetchBanks()
@@ -51,6 +53,7 @@ fetchBanks()
 To run the Mavapay Client locally, follow these steps:
 
 ### Prerequisites
+
 - **1)** Install `nix` with flakes enabled
 - **2)** Install `direnv` and configure it for your shell
 
@@ -63,6 +66,7 @@ Run the following command to install dependencies:
 ```bash
 nix develop -c pnpm install
 ```
+
 ### Build
 
 Build production (distribution) files in dist folder:
