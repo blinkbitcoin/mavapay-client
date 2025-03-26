@@ -26,26 +26,106 @@ pnpm add @blinkbitcoin/mavapay-client
 
 ## Usage
 
+### Authentication
+
+Before calling any API, you need to configure authentication:
+
+```ts
+import { mavapayClient } from "@blinkbitcoin/mavapay-client"
+
+mavapayClient.configureAuth({
+  network: "signet", // Can be "mainnet" | "signet" | "regtest"
+  apiKey: "<YOUR_MAVAPAY_API_KEY>",
+})
+```
+
 ### getBanksByCountry
 
-```js
+Retrieve a list of banks available for a given country:
+
+```ts
 import { mavapayClient } from "@blinkbitcoin/mavapay-client"
+
+mavapayClient.configureAuth({
+  network: "signet",
+  apiKey: "<YOUR_MAVAPAY_API_KEY>",
+})
 
 async function fetchBanks() {
   try {
-    const banks = await mavapayClient.getBanksByCountry("NG") // The parameter is a country code
+    const banks = await mavapayClient.getBanksByCountry("NG") // "NG" = Nigeria
 
     if ("type" in banks) {
       console.error("Error retrieving banks:", banks.message)
-    } else {
-      console.log("Banks retrieved:", banks) // Returns an array of bank objects
+      return
     }
+
+    console.log("Banks retrieved:", banks) // Returns an array of bank objects
   } catch (error) {
-    console.error("Unexpected error: ", error)
+    console.error("Unexpected error:", error)
   }
 }
 
 fetchBanks()
+```
+
+### getQuote
+
+Retrieve a quote to send Bitcoin to a bank account:
+
+```ts
+import { mavapayClient } from "@blinkbitcoin/mavapay-client"
+
+mavapayClient.configureAuth({
+  network: "signet",
+  apiKey: "<YOUR_MAVAPAY_API_KEY>",
+})
+
+async function fetchQuote() {
+  try {
+    const quote = await mavapayClient.getQuote({
+      amount: 300000,
+      sourceCurrency: "BTCSAT",
+      targetCurrency: "NGNKOBO",
+      paymentMethod: "LIGHTNING",
+      paymentCurrency: "NGNKOBO",
+      autopayout: true,
+      beneficiary: {
+        bankAccountNumber: "0123456789",
+        bankAccountName: "olaolu olajide",
+        bankCode: "090267",
+        bankName: "GTBANK PLC",
+      },
+    })
+
+    if ("type" in quote) {
+      console.error("Error retrieving quote:", quote.message)
+      return
+    }
+
+    console.log("Quote:", quote) // Return the Lightning payment details
+  } catch (error) {
+    console.error("Unexpected error:", error)
+  }
+}
+
+fetchQuote()
+```
+
+## Currency Types
+
+- `NGNKOBO`: Nigerian Naira in Kobo
+- `ZARCENT`: South African Rand in Cents
+
+## Type Definitions
+
+```ts
+type Network = "mainnet" | "signet" | "regtest"
+
+type AuthConfig = {
+  apiKey: string
+  network: Network
+}
 ```
 
 ## Local Development
