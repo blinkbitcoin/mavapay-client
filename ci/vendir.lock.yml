@@ -2,14 +2,14 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'chore: deleted check-code.sh'
-      sha: 8e4965503220e0631032f4415cbf0353fe01a0bd
+      commitTitle: 'chore: mavapay working (#3)...'
+      sha: 3e127f09f16932cb788b418b4203f2b831c940f8
     path: .
   path: ../.github/workflows/vendor
 - contents:
   - git:
-      commitTitle: 'chore: deleted check-code.sh'
-      sha: 8e4965503220e0631032f4415cbf0353fe01a0bd
+      commitTitle: 'chore: mavapay working (#3)...'
+      sha: 3e127f09f16932cb788b418b4203f2b831c940f8
     path: .
   path: vendor
 kind: LockConfig
