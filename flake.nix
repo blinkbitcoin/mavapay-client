@@ -18,12 +18,9 @@
           buildInputs = [
             pkgs.nodejs_22
             pkgs.pnpm
-<<<<<<< HEAD
             pkgs.vendir
-=======
             pkgs.typescript
             pkgs.eslint
->>>>>>> 4494dd2 (chore: adding typescript and eslint to nix environment)
           ];
         };
       }
