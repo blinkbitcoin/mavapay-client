@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm install && tsup",
+    "build": "tsup",
     "code:check": "pnpm tsc:check && pnpm eslint:check && pnpm prettier:check",
     "eslint:check": "eslint .",
     "eslint:fix": "eslint . --fix",
