@@ -2,14 +2,14 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'chore: mavapay working (#3)...'
-      sha: 3e127f09f16932cb788b418b4203f2b831c940f8
+      commitTitle: 'fix: bumping for forked repos'
+      sha: ad3cbefbb52f34f7ebc322bfe50a998087b6e373
     path: .
   path: ../.github/workflows/vendor
 - contents:
   - git:
-      commitTitle: 'chore: mavapay working (#3)...'
-      sha: 3e127f09f16932cb788b418b4203f2b831c940f8
+      commitTitle: 'fix: bumping for forked repos'
+      sha: ad3cbefbb52f34f7ebc322bfe50a998087b6e373
     path: .
   path: vendor
 kind: LockConfig
