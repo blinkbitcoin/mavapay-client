@@ -3,4 +3,5 @@ dist/
 coverage/
 .vscode/
 .direnv/
+.pnpm-store
 .npm-store
