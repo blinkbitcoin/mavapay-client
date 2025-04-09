@@ -2,14 +2,14 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'chore: upgrade npm via recent docker-repo and more verbosity (#8)...'
-      sha: 8e74bb7383fb55fbf8ba6ab98780310b2b07d6d2
+      commitTitle: 'chore: enable webhooks for pipeline-tasks git resource (#9)...'
+      sha: 569a7824f10b6e0dccb68fb933d80ca7f121ef7a
     path: .
   path: ../.github/workflows/vendor
 - contents:
   - git:
-      commitTitle: 'chore: upgrade npm via recent docker-repo and more verbosity (#8)...'
-      sha: 8e74bb7383fb55fbf8ba6ab98780310b2b07d6d2
+      commitTitle: 'chore: enable webhooks for pipeline-tasks git resource (#9)...'
+      sha: 569a7824f10b6e0dccb68fb933d80ca7f121ef7a
     path: .
   path: vendor
 kind: LockConfig
