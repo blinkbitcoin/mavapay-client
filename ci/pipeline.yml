@@ -153,9 +153,9 @@ jobs:
 
 
 resources:
-- #@ repo_resource()
+- #@ repo_resource(webhook=True)
 - #@ nodejs_deps_resource(pckgMgr="pnpm")
-- #@ pipeline_tasks_resource()
+- #@ pipeline_tasks_resource(webhook=True)
 - #@ deps_version_resource()
 - #@ bundled_deps_resource()
 - #@ version_resource()
