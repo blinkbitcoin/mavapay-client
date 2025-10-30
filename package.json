@@ -33,7 +33,7 @@
     "tsc:check": "tsc --pretty --noEmit --skipLibCheck"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.2.7",
+    "@eslint/compat": "^1.4.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.13",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
